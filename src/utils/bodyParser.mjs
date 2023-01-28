@@ -1,4 +1,4 @@
-export function bodyParser(req) {
+export function bodyParser(req, cb) {
   let body = '';
 
   req.on('data', (chunk) => {
@@ -8,5 +8,6 @@ export function bodyParser(req) {
   req.on('end', () => {
     body = JSON.parse(body);
     req.body = body;
+    cb();
   });
 }
