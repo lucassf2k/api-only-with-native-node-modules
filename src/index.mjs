@@ -1,6 +1,7 @@
 import http from 'node:http';
 import { URL } from 'node:url';
 
+import { bodyParser } from './utils/bodyParser.mjs';
 import { routes } from './routes.mjs';
 
 const server = http.createServer((req, res) => {
@@ -30,7 +31,11 @@ const server = http.createServer((req, res) => {
       res.end(JSON.stringify(body));
     };
 
-    route.handler(req, res);
+    if (['POST', 'PUT', 'PATCH'].includes(req.method)) {
+      bodyParser(req, () => route.handler(req, res));
+    } else {
+      route.handler(req, res);
+    }
   } else {
     res.send(404, `Cannot ${req.method} ${parseUrl.pathname}`);
   }
