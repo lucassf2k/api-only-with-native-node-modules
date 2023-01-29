@@ -13,4 +13,19 @@ export const routes = [
     method: 'GET',
     handler: heroesController.getHeroById,
   },
+  {
+    endpoint: '/heroes',
+    method: 'POST',
+    handler: heroesController.createHero,
+  },
+  {
+    endpoint: '/heroes/:id',
+    method: 'PUT',
+    handler: heroesController.updateHero,
+  },
+  {
+    endpoint: '/heroes/:id',
+    method: 'DELETE',
+    handler: heroesController.deleteHero,
+  },
 ];
